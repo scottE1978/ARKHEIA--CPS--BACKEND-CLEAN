@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from arkheia_cps.routers.billing import router as billing_router
-from arkheia_cps.routers.contracts import router as contracts_router
+from routers.billing import router as billing_router
+from routers.contracts import router as contracts_router
 
 app = FastAPI()
 
