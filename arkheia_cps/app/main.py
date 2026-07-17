@@ -1,4 +1,4 @@
-
+print("MAIN IMPORTED")
 from fastapi import FastAPI
 from app.routers import billing, contracts
 
