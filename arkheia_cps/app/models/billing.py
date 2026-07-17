@@ -1,11 +1,6 @@
-from fastapi import APIRouter
-from arkheia_cps.app.models.billing import BillInput
+print("LOADING BILLING MODEL")
 
-router = APIRouter(
-    prefix="/billing",
-    tags=["billing"]
-)
+from pydantic import BaseModel
 
-@router.post("/process")
-def process_bill(data: BillInput):
-    return {"received": data.text}
+class BillInput(BaseModel):
+    text: str
