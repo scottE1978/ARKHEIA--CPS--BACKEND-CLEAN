@@ -1,25 +1,15 @@
-from fastapi import APIRouter
-from arkheia_cps.app.services.contract_analysis import analyze_contract
-from arkheia_cps.app.models.contract import ContractInput
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+
+from app.db import get_db
+from app.services.<service_name> import <ServiceClass>
 
 router = APIRouter(
-    prefix="/analysis/contract",
-    tags=["Contract Analysis"]
+    prefix="/<route>",
+    tags=["<tag>"]
 )
 
-@router.post("/")
-def analyze_contract_endpoint(payload: ContractInput):
-    """
-    Contract Analysis Endpoint
-    --------------------------
-    Accepts raw contract text and returns:
-    - structural inconsistencies
-    - factual contradictions
-    - undefined terms
-    - mismatched numbers
-    - missing references
-    - timeline errors
-
-    This endpoint is part of the ARKHEIA‑CPS multi‑discipline engine.
-    """
-    return analyze_contract(payload.text)
+@router.get("/")
+def list_items(db: Session = Depends(get_db)):
+    service = <ServiceClass>(db)
+    return service.list_items()
