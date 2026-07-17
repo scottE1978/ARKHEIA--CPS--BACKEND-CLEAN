@@ -1,15 +1,18 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+print("MAIN IMPORTED")
 
-from app.db import get_db
-from app.services.<service_name> import <ServiceClass>
+from fastapi import FastAPI
+from app.routers import billing, contracts
 
-router = APIRouter(
-    prefix="/<route>",
-    tags=["<tag>"]
+app = FastAPI(
+    title="ARKHEIA-CPS",
+    version="1.0.0"
 )
 
-@router.get("/")
-def list_items(db: Session = Depends(get_db)):
-    service = <ServiceClass>(db)
-    return service.list_items()
+# Routers
+app.include_router(billing.router)
+app.include_router(contracts.router)
+
+# Health check endpoint
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
