@@ -1,18 +1,37 @@
-print("MAIN IMPORTED")
+print("LOADING BILLING ROUTER")
 
-from fastapi import FastAPI
-from app.routers import billing, contracts
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
-app = FastAPI(
-    title="ARKHEIA-CPS",
-    version="1.0.0"
+from app.db import get_db
+from app.services.billing_service import BillingService
+
+router = APIRouter(
+    prefix="/billing",
+    tags=["billing"]
 )
 
-# Routers
-app.include_router(billing.router)
-app.include_router(contracts.router)
+@router.get("/")
+def list_billing_records(db: Session = Depends(get_db)):
+    service = BillingService(db)
+    return service.get_records()
 
-# Health check endpoint
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}
+@router.get("/{record_id}")
+def get_billing_record(record_id: int, db: Session = Depends(get_db)):
+    service = BillingService(db)
+    return service.get_record_by_id(record_id)
+
+@router.post("/")
+def create_billing_record(data: dict, db: Session = Depends(get_db)):
+    service = BillingService(db)
+    return service.create_record(data)
+
+@router.put("/{record_id}")
+def update_billing_record(record_id: int, data: dict, db: Session = Depends(get_db)):
+    service = BillingService(db)
+    return service.update_record(record_id, data)
+
+@router.delete("/{record_id}")
+def delete_billing_record(record_id: int, db: Session = Depends(get_db)):
+    service = BillingService(db)
+    return service.delete_record(record_id)
