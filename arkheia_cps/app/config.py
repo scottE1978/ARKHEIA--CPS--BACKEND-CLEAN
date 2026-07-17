@@ -1,7 +1,8 @@
-from pydantic import BaseSettings
+print("LOADING CONFIG")
+
+from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    app_name: str = "ARKHEIA-CPS"
-    environment: str = "production"
+    database_url: str = "sqlite:///./test.db"
 
 settings = Settings()
