@@ -1,7 +1,10 @@
 from fastapi import APIRouter
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/billing",
+    tags=["billing"]
+)
 
-@router.get("/billing/test")
-def billing_test():
-    return {"message": "Billing router is working"}
+@router.post("/analyze")
+def analyze_billing(data: dict):
+    return {"message": "Billing analysis complete", "input": data}
