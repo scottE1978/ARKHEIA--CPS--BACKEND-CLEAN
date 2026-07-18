@@ -7,4 +7,10 @@ router = APIRouter(
 
 @router.post("/analyze")
 def analyze_billing(data: dict):
-    return {"message": "Billing analysis complete", "input": data}
+    """
+    Analyze billing data and return a structured response.
+    """
+    return {
+        "message": "Billing analysis complete",
+        "input": data
+    }
