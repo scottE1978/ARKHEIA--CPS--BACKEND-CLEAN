@@ -14,4 +14,4 @@ def analyze_contracts(data: dict):
         "message": "Contract analysis complete",
         "input": data
     }
-}
+
