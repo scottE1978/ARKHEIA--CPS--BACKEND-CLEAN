@@ -1,5 +1,3 @@
-print("LOADING CONTRACTS ROUTER")
-
 from fastapi import APIRouter
 
 router = APIRouter(
@@ -7,6 +5,6 @@ router = APIRouter(
     tags=["contracts"]
 )
 
-@router.get("/")
-def list_contracts():
-    return {"message": "contracts endpoint online"}
+@router.post("/analyze")
+def analyze_contracts(data: dict):
+    return {"message": "Contract analysis complete", "input": data}
