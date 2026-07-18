@@ -1,13 +1,9 @@
 from fastapi import FastAPI
-from app.routers import billing, contracts
+from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
-# Include routers
-app.include_router(billing.router)
-app.include_router(contracts.router)
-
-# Optional homepage route
 @app.get("/")
+@app.head("/")
 def root():
-    return {"status": "ARKHEIA-CPS backend is running"}
+    return JSONResponse({"status": "ARKHEIA-CPS backend is running"})
