@@ -7,4 +7,11 @@ router = APIRouter(
 
 @router.post("/analyze")
 def analyze_contracts(data: dict):
-    return {"message": "Contract analysis complete", "input": data}
+    """
+    Analyze contract data and return a structured response.
+    """
+    return {
+        "message": "Contract analysis complete",
+        "input": data
+    }
+}
